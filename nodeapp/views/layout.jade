@@ -2,8 +2,12 @@ doctype 5
 html
 	head
 		title= title
-		link(href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css", rel="stylesheet")
+		link(href="//netdna.bootstrapcdn.com/bootswatch/3.0.0/cosmo/bootstrap.min.css", rel="stylesheet")
 		link(href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css", rel="stylesheet")
 		link(rel='stylesheet', href='/stylesheets/style.css')
-	body
+	body(ng-app="geo")
 	block content
+	script(type='text/javascript', src= "https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js")
+	script(type='text/javascript', src= "/app/route.js")
+	script(type='text/javascript', src= "/app/config.js")
+	script(type='text/javascript', src= "/app/controller.js")
