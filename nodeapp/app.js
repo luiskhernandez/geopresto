@@ -7,7 +7,18 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , mongoose = require("mongoose")
+  , Schema = mongoose.Schema;
+mongoose.connect('mongodb://admin:1234@localhost:27017/geoprestodb');
+
+var PlaceSchema = Schema({
+	name : String,
+	address: String,  
+	location: []
+});
+PlaceSchema.index({ loc: '2d' });
+var Place = mongoose.model("Place",PlaceSchema);
 
 var app = express();
 
