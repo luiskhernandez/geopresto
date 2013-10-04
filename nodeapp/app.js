@@ -14,7 +14,7 @@ mongoose.connect('mongodb://admin:1234@localhost:27017/geoprestodb');
 
 var PlaceSchema = Schema({
 	name : String,
-	address: String,  
+	icon: String,  
 	location: []
 });
 PlaceSchema.index({ loc: '2d' });

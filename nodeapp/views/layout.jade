@@ -7,7 +7,10 @@ html
 		link(rel='stylesheet', href='/stylesheets/style.css')
 	body(ng-app="geo")
 	block content
+	script(type='text/javascript', src= "//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js")
 	script(type='text/javascript', src= "https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js")
+	script(type='text/javascript', src= "http://maps.googleapis.com/maps/api/js?sensor=false&language=en")
+	script(type='text/javascript', src= "/app/vendor/angular-google-maps.js")
 	script(type='text/javascript', src= "/app/route.js")
 	script(type='text/javascript', src= "/app/config.js")
 	script(type='text/javascript', src= "/app/controller.js")
