@@ -5,20 +5,15 @@
 
 var express = require('express')
   , routes = require('./routes')
-  , user = require('./routes/user')
+  , places = require('./routes/places')
   , http = require('http')
-  , path = require('path')
-  , mongoose = require("mongoose")
-  , Schema = mongoose.Schema;
-mongoose.connect('mongodb://admin:1234@localhost:27017/geoprestodb');
-
-var PlaceSchema = Schema({
-	name : String,
-	icon: String,  
-	location: []
-});
-PlaceSchema.index({ loc: '2d' });
-var Place = mongoose.model("Place",PlaceSchema);
+  , path = require('path');
+var mongoose = require("mongoose")
+var db = mongoose.connection;
+  db.on('error', console.error.bind(console, 'connection error:'));
+  db.once('open', function callback () {
+      console.log("conectado a la db")
+  }); 
 
 var app = express();
 
@@ -42,7 +37,9 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/users', user.list);
+app.get('/places', places.list);
+app.post('/places', places.addPlace);
+app.post('/places/near', places.near);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

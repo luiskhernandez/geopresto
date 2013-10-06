@@ -1,42 +1,106 @@
 <div class="container">
 	<div class="col-lg-4">
 		<div class="row">
-			<form ng-submit="add()" class="form-horizontal" role="form">
-				<div class="form-group">
-					<label for="inputEmail1" class="col-lg-4 control-label">name</label>
-					<div class="col-lg-8">
-						<input type="text" class="form-control" ng-model="markerTemp.infoWindow">
-					</div>
-				</div>				
-				<div class="form-group">
-					<label for="inputEmail1" class="col-lg-4 control-label">latitude</label>
-					<div class="col-lg-8">
-						<input type="text" class="form-control" ng-model="markerTemp.latitude">
-					</div>
+
+			<div class="panel panel-default" ng-show="add">
+				<div class="panel-heading">
+					
+					<button ng-click="add=false" ng-show="add==true" class="btn btn-success pull-right" ng-init="add=true">
+						Buscar
+					</button>	
+					<div style="clear:both"></div>				
 				</div>
-				<div class="form-group">
-					<label for="inputPassword1" class="col-lg-4 control-label">longitude</label>
-					<div class="col-lg-8">
-						<input type="text" class="form-control" ng-model="markerTemp.longitude">
-					</div>
+				<div class="panel-body">
+					<h3>Add new place</h3>
+					<form  ng-submit="addPlace()" class="form-horizontal" role="form">
+						<div class="form-group">
+							<label for="inputEmail1" class="col-lg-4 control-label">name</label>
+							<div class="col-lg-8">
+								<input type="text" class="form-control" ng-model="markerTemp.infoWindow">
+							</div>
+						</div>				
+						<div class="form-group">
+							<label for="inputEmail1" class="col-lg-4 control-label">latitude</label>
+							<div class="col-lg-8">
+								<input type="text" class="form-control" ng-model="markerTemp.latitude">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputPassword1" class="col-lg-4 control-label">longitude</label>
+							<div class="col-lg-8">
+								<input type="text" class="form-control" ng-model="markerTemp.longitude">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputPassword1" class="col-lg-4 control-label">Type</label>
+							<div class="col-lg-8">
+								<select ng-model="markerTemp.type" class="form-control" ng-init="markerTemp.type=1">
+									<option value="0"> Apartment</option>
+									<option value="1"> House</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-lg-offset-2 col-lg-10">
+								<button type="submit" class="btn btn-default">
+									add
+								</button>
+							</div>
+						</div>
+					</form>
 				</div>
-				<div class="form-group">
-					<div class="col-lg-offset-2 col-lg-10">
-						<button type="submit" class="btn btn-default">
-							add
-						</button>
-					</div>
-				</div>
-			</form>
+			</div>
+
 		</div>
-		<ul class="list-group">
-			<li ng-repeat="item in markers" class="list-group-item">
-				{{ item.infoWindow }}
-			</li>
-		</ul>
+
+		<br>
+		<div ng-hide="add" id="seach_panel">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Search for near places
+					<button ng-click="add=true" ng-show="add==false" class="btn btn-success pull-right">
+						Add place
+					</button>				
+					<div style="clear:both;"></div>	
+				</div>
+				<div class="panel-body">
+					<form ng-submit="near()" class="form-horizontal">
+						<div class="form-group">
+							<label  class="col-lg-4 control-label">		Place
+							</label>
+							<div class="col-lg-8">
+								<select ng-model="place" class="form-control" ng-options="item.infoWindow for item in markers_list">
+								</select>	
+							</div>
+						</div>	
+						<div class="form-group">
+							<label for="inputPassword1" class="col-lg-4 control-label">Radius</label>
+							<div class="col-lg-8">
+								<select ng-model="radius" class="form-control" ng-init="radius=2000">
+									<option value="1000"> 1 km</option>
+									<option value="2000"> 2 km </option>
+									<option value="3000"> 3 km </option>
+									<option value="4000"> 4 km </option>
+									<option value="4000"> 4 km </option>
+									<option value="25000"> 25 km </option>
+								</select>
+							</div>
+						</div>
+						<button class="btn btn-block btn-primary">
+							Search
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
 	</div>
 	<div class="col-lg-8">
-		<google-map center="center" id="map" draggable="true" zoom="zoom" markers="markers" mark-click="true"latitude="markerTemp.latitude" longitude="markerTemp.longitude"  >
+		<google-map center="center" id="map" draggable="true" zoom="zoom" markers="markers"  mark-click="true"latitude="markerTemp.latitude" fit="true" longitude="markerTemp.longitude"  >
 	</google-map>
+	<button ng-click="showAll()" class="btn btn-info btn-block">
+		Show all
+	</button>
 </div>
 </div>
