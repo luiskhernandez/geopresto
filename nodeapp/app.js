@@ -7,6 +7,7 @@ var express = require('express')
   , routes = require('./routes')
   , places = require('./routes/places')
   , http = require('http')
+  , port = require("./dbconfig").port
   , path = require('path');
 var mongoose = require("mongoose")
 var db = mongoose.connection;
@@ -41,6 +42,6 @@ app.get('/places', places.list);
 app.post('/places', places.addPlace);
 app.post('/places/near', places.near);
 
-http.createServer(app).listen(app.get('port'), function(){
+http.createServer(app).listen(port, function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
