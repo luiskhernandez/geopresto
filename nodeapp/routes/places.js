@@ -37,7 +37,7 @@ exports.list = function(request,response) {
 exports.near = function(request,response) {
 	var place = request.body.item;
 	var radius = request.body.radius;
-	console.log(request.body)
+	
 	Place.find({ location :
 	 { '$near' :{
 	 	"$geometry":{
@@ -49,7 +49,7 @@ exports.near = function(request,response) {
 	  "$maxDistance":radius
 	 }
 	 },function (err, places) {
-	 	console.log(places)
+	 	
 	  if (err) response.json({"mensanje":"error"})
 	  	data = []
 	  _.each(places,function(item) {
